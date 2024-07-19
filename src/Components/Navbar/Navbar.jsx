@@ -1,17 +1,27 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom';
 import './Navbar.css'
 import logo from '../../assets/logo.png'
 
 const Navbar = () => {
+
+  const [sticky, setSticky] = useState(false);
+
+  useEffect(() => {
+    window.addEventListener('scroll', () => {
+      window.scrollY > 50 ? setSticky(true) : setSticky(false);
+    })
+  }, []);
+  
   return (
-    <nav className='container'>
+    <nav className={`container ${sticky? 'dark-nav' : ''}`}>
         <img src={logo} alt="" className='logo'/>
         <ul>
-              <li>Home</li>
-              <li>Map</li>
-              <li>Service Stations</li>
-              <li>About Us</li>
-              <li><button className='btn'>Register</button></li>
+              <li><Link to="/">Home</Link></li>
+              <li><Link to="/map/">Map</Link></li>
+              <li><Link to="/service">Service Stations</Link></li>
+              <li><Link to="/about">About Us</Link></li>
+              <li><Link to="/register"><button className='btn'>Register</button></Link></li>
         </ul>
     </nav>
   )
