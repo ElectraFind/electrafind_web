@@ -8,7 +8,7 @@ import icon_2 from '../../assets/ev-icon-2.png'
 import icon_3 from '../../assets/ev-icon-3.png'
 
 const Benefits = () => {
-  return (
+    return (
     <div className='benefits'>
         <div className='benefit'>
             <img src={benefit_1} alt="" />
