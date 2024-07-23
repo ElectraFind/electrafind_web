@@ -1,0 +1,32 @@
+.form-container {
+  width: 500px;
+  background: green;
+  color: #3c3c3c;
+}
+  
+.form-container h2 {
+  font-size: 36px;
+  text-align: center;
+  color: #fff;
+}
+
+.form-container .input-box{
+  position: relative;
+  width: 100%;
+  height: 50px;
+  margin: 30px auto;
+}
+
+.input-box input{
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  border: none;
+  outline: none;
+  border: 1px white solid;
+  border-radius: 40px;
+}
+
+.input-box input::placeholder{
+  color: #fff;
+}

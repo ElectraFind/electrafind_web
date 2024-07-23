@@ -27,9 +27,9 @@ const RegQR = () => {
                 </div>
             </div>
         </div>
-        <div className='admin-login'>
+        {/* <div className='admin-login'>
             <Link to="/admin-login"><p>Login as Admin</p></Link>
-        </div>
+        </div> */}
     </div>
   )
 }

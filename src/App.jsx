@@ -2,7 +2,7 @@ import React from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import HomePage from './components/Pages/HomePage';
 import Map from './components/Pages/Map';
-// import ServiceStations from './components/Pages/ServiceStations';
+import ServiceStationsPage from './components/Pages/ServiceStationsPage';
 // import AboutPage from './components/Pages/AboutPage';
 import RegistrationPage from './components/Pages/RegistrationPage';
 import AdminLoginPage from './components/Pages/AdminLoginPage';
@@ -16,7 +16,7 @@ const App = () => {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/map" element={<Map />} />
-        {/* <Route path="/servicestations" element={<ServiceStations />} /> */}
+        <Route path="/servicestations" element={<ServiceStationsPage />} />
         {/* <Route path="/about" element={<AboutPage />} /> */}
         <Route path="/register" element={<RegistrationPage />} />
         <Route path="/admin-login" element={<AdminLoginPage />} />
