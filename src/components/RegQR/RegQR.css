@@ -27,7 +27,8 @@
     top: 0;
     height: 100%;
     width: 100%;
-    background: rgba(0, 0, 0, 0.6);
+    /* background: rgba(0, 0, 0, 0.6); */
+    background: linear-gradient(rgba(0, 0, 0, 0.75),rgba(0, 168, 72, 0.75));
     padding: 20px 40px;
     border-radius: 10px;
 }

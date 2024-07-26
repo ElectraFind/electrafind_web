@@ -10,6 +10,8 @@
     width: 100%;
     border-radius: 10px;
     display: block;
+    /* border: red 1px solid; */
+    /* box-shadow: 0 0 10px rgba(255, 255, 255, 0.2); */
 }
 
 .benefit{
@@ -19,6 +21,7 @@
 
 .caption{
     border: 10px;
+    border-radius: 10px;
     position: absolute;
     top: 0;
     left: 0;

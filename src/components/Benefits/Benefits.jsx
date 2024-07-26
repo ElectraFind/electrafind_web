@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
 import './Benefits.css'
 import benefit_1 from '../../assets/benefit-1.png'
 import benefit_2 from '../../assets/benefit-2.png'
@@ -12,24 +13,24 @@ const Benefits = () => {
     <div className='benefits'>
         <div className='benefit'>
             <img src={benefit_1} alt="" />
-            <div className='caption'>
+            <Link to="/register"><div className='caption'>
                 <img src={icon_1} alt="" />
                 <p>Home Charging</p>
-            </div>
+            </div></Link>
         </div>
         <div className='benefit'>
             <img src={benefit_2} alt="" />
-            <div className='caption'>
+            <Link to="/map"><div className='caption'>
                 <img src={icon_2} alt="" />
                 <p>Charging Stations</p>
-            </div>  
+            </div></Link>  
         </div>
         <div className='benefit'>
             <img src={benefit_3} alt="" />
-            <div className='caption'>
+            <Link to="/servicestations"><div className='caption'>
                 <img src={icon_3} alt="" />
                 <p>Service Stations</p>
-            </div>
+            </div></Link>
         </div>
     </div>
   )

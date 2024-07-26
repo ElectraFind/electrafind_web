@@ -8,7 +8,7 @@ const RegistrationPage = () => {
     <div>
         <Navbar/>
         <div className='container'>
-            <RegQR/>
+          <RegQR/>
         </div>
     </div>
   );
