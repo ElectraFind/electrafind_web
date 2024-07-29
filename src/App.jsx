@@ -1,7 +1,7 @@
 import React from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import HomePage from './components/Pages/HomePage';
-import Map from './components/Pages/Map';
+import MapPage from './components/Pages/MapPage';
 import ServiceStationsPage from './components/Pages/ServiceStationsPage';
 import AboutPage from './components/Pages/AboutPage';
 import RegistrationPage from './components/Pages/RegistrationPage';
@@ -15,7 +15,7 @@ const App = () => {
       <Navbar/>
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/map" element={<Map />} />
+        <Route path="/map" element={<MapPage />} />
         <Route path="/servicestations" element={<ServiceStationsPage />} />
         <Route path="/about" element={<AboutPage />} />
         <Route path="/register" element={<RegistrationPage />} />
