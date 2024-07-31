@@ -8,21 +8,24 @@ import RegistrationPage from './components/Pages/RegistrationPage';
 import AdminLoginPage from './components/Pages/AdminLoginPage';
 import AdminPanel from './components/Pages/AdminPanel';
 import Navbar from './components/Navbar/Navbar';
+import { UserLocationProvider } from './context/UserLocationContext';
 
 const App = () => {
   return (
-    <Router>
-      <Navbar/>
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/map" element={<MapPage />} />
-        <Route path="/servicestations" element={<ServiceStationsPage />} />
-        <Route path="/about" element={<AboutPage />} />
-        <Route path="/register" element={<RegistrationPage />} />
-        <Route path="/admin-login" element={<AdminLoginPage />} />
-        <Route path="/admin-panel" element={<AdminPanel />} />
-      </Routes>
-    </Router>
+    <UserLocationProvider>
+      <Router>
+        <Navbar/>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/map" element={<MapPage />} />
+          <Route path="/servicestations" element={<ServiceStationsPage />} />
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/register" element={<RegistrationPage />} />
+          <Route path="/admin-login" element={<AdminLoginPage />} />
+          <Route path="/admin-panel" element={<AdminPanel />} />
+        </Routes>
+      </Router>
+    </UserLocationProvider>
   )
 }
 
