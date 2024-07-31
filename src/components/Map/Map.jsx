@@ -1,82 +1,80 @@
-import React, { useState, useEffect } from 'react'
-import { GoogleMap, LoadScript } from '@react-google-maps/api'
+import React, { useContext, useEffect, useState } from 'react'
+import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
+import 'leaflet/dist/leaflet.css'
+import L from 'leaflet'
 import CustomMarker from './CustomMarker'
+import UserLocationContext from '../../context/UserLocationContext.jsx'
+import stationIconUrl from '../../assets/station-icon.png'
+import homeChargerIconUrl from '../../assets/home-charger-icon.png'
+import PropTypes from 'prop-types'
 import './Map.css'
 
+const stationIcon = new L.Icon({
+  iconUrl: stationIconUrl,
+  iconSize: [32, 32],
+})
+
+const homeChargerIcon = new L.Icon({
+  iconUrl: homeChargerIconUrl,
+  iconSize: [32, 32],
+})
+
 const Map = () => {
-  const [currentPosition, setCurrentPosition] = useState(null)
-  const [selectedMarker, setSelectedMarker] = useState(null)
-
-  const stations = [
-    { lat: 6.9271, lng: 79.8612, name: 'chargeNET Charging Station', address: 'Colombo', type: 'station', phone: '0111234567' },
-    { lat: 6.934, lng: 79.858, name: 'Home Charger', address: 'Kotte', type: 'home', phone: '0112345678' },
-    // Add more locations as needed
-  ]
-
-  const icons = {
-    home: {
-      url: "../../assets/location-pin-home.png",
-      scaledSize: { width: 32, height: 32 }
-    },
-    station: {
-      url: "../../assets/location-pin-station.png",
-      scaledSize: { width: 32, height: 32 }
-    }
-  }
+  const { userLocation } = useContext(UserLocationContext)
+  const [stations, setStations] = useState([])
+  const [homeChargers, setHomeChargers] = useState([])
 
   useEffect(() => {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          setCurrentPosition({
-            lat: position.coords.latitude,
-            lng: position.coords.longitude,
-          });
-        },
-        (error) => console.error('Error fetching location:', error),
-        { timeout: 10000 }
-      );
-    } else {
-      console.error('Geolocation is not supported by this browser.');
-    }
+    setStations([
+      { name: 'ChargeNET Charging Station', location: [6.870938,79.865313], address: '57 Pereira Ln, Colombo 00600', phone: '0704101258' },
+      { name: 'chargeNET Charging Station', location: [6.911437, 79.865062], address: '6, 7 Horton Pl, Colombo 00700', phone: 'not provided' },
+      { name: 'chargeNET Charging Station', location: [6.908563,79.939312], address: 'Kotte-Bope Road, New Kandy Rd', phone: '0770555553' },
+      { name: 'Electric vehicle Charging Point', location: [6.929438,79.860937], address: 'Trace Expert City,Tripoli Square, Maradana, Colombo-10 01000', phone: '0115551551' },
+      { name: 'Electric Vehicle Charging Station', location: [6.870938,79.865313], address: '46 Pereira Ln, Colombo 00600', phone: 'not provided' },
+      { name: 'Electric Vehicle Charging Station', location: [6.911437, 79.865062], address: '191 Alakeshwara Rd, Sri Jayawardenepura Kotte 10100', phone: '0773410003' },
+      { name: 'eShift Charging Station', location: [6.911938,79.855688], address: 'Colombo 00700', phone: '0117555554' },
+    ]);
+
+    setHomeChargers([
+      { name: 'Fredrick\'s Kotte', location: [6.895188, 79.911312], address: '191 Alakeshwara Rd, Sri Jayawardenepura Kotte', phone: '0773410003'},
+      { name: 'Havelock city', location: [6.882437,79.866563], address: 'Havelock City', phone: '0115551551'},
+    ]);
   }, [])
 
   return (
-    <LoadScript googleMapsApiKey="AIzaSyDTYD4DNXMdQCRcjy0-ePWn5OpM0Ggki54">
-      <GoogleMap
-        mapContainerClassName="map-container"
-        center={currentPosition || { lat: 6.9271, lng: 79.8612 }}
-        zoom={12}
-      >
-        {currentPosition && (
-          <CustomMarker
-            position={currentPosition}
-            icon={{
-              url: "/assets/location-pin-home.png",
-              scaledSize: { width: 32, height: 32 }
-            }}
-            name="Your Location"
-            address=""
-            phone=""
-            onClick={() => setSelectedMarker(null)}
-            isSelected={selectedMarker === null}
-          />
-        )}
-        {stations.map((station, index) => (
-          <CustomMarker
-            key={index}
-            position={{ lat: station.lat, lng: station.lng }}
-            icon={icons[station.type]}
-            name={station.name}
-            address={station.address}
-            phone={station.phone}
-            onClick={() => setSelectedMarker(station)}
-            isSelected={selectedMarker === station}
-          />
-        ))}
-      </GoogleMap>
-    </LoadScript>
+    <MapContainer center={userLocation} zoom={12} style={{ height: 'calc(100vh - 65px)', width: '100%' }}>
+      <TileLayer
+        url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
+        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+      />
+
+      {stations.map((station, index) => (
+        <Marker key={index} position={station.location} icon={stationIcon}>
+          <Popup>
+            <b>{station.name}</b><br />
+            {station.address}<br />
+            {station.phone}
+          </Popup>
+        </Marker>
+      ))}
+      
+      {homeChargers.map((charger, index) => (
+        <CustomMarker key={index} position={charger.location} icon={homeChargerIcon}>
+          <Popup>
+            <b>{charger.name}</b><br />
+            {charger.address}<br />
+            {charger.phone}
+          </Popup>
+        </CustomMarker>
+      ))}
+    </MapContainer>
   )
+}
+
+Map.propTypes = {
+  userLocation: PropTypes.arrayOf(PropTypes.number).isRequired,
+  stations: PropTypes.arrayOf(PropTypes.object).isRequired,
+  homeChargers: PropTypes.arrayOf(PropTypes.object).isRequired,
 }
 
 export default Map;
