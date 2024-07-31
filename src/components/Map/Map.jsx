@@ -58,14 +58,14 @@ const Map = () => {
         </Marker>
       ))}
       
-      {homeChargers.map((charger, index) => (
-        <CustomMarker key={index} position={charger.location} icon={homeChargerIcon}>
+      {homeChargers.map((homeChargers, index) => (
+        <Marker key={index} position={homeChargers.location} icon={homeChargerIcon}>
           <Popup>
-            <b>{charger.name}</b><br />
-            {charger.address}<br />
-            {charger.phone}
+            <b>{homeChargers.name}</b><br />
+            {homeChargers.address}<br />
+            {homeChargers.phone}
           </Popup>
-        </CustomMarker>
+        </Marker>
       ))}
     </MapContainer>
   )
