@@ -1,0 +1,16 @@
+.info-window-content {
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    padding: 10px;
+}
+  
+.info-window-content h2 {
+    font-size: 16px;
+    margin: 0 0 5px;
+}
+  
+.info-window-content p {
+    margin: 0;
+    line-height: 1.4;
+}
+  
