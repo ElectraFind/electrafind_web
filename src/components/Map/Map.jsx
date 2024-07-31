@@ -1,17 +1,17 @@
-import React, { useState, useEffect } from 'react';
-import { GoogleMap, LoadScript } from '@react-google-maps/api';
-import CustomMarker from './CustomMarker/CustomMarker';
-import './Map.css';
+import React, { useState, useEffect } from 'react'
+import { GoogleMap, LoadScript } from '@react-google-maps/api'
+import CustomMarker from './CustomMarker'
+import './Map.css'
 
 const Map = () => {
-  const [currentPosition, setCurrentPosition] = useState(null);
-  const [selectedMarker, setSelectedMarker] = useState(null);
+  const [currentPosition, setCurrentPosition] = useState(null)
+  const [selectedMarker, setSelectedMarker] = useState(null)
 
   const stations = [
     { lat: 6.9271, lng: 79.8612, name: 'chargeNET Charging Station', address: 'Colombo', type: 'station', phone: '0111234567' },
     { lat: 6.934, lng: 79.858, name: 'Home Charger', address: 'Kotte', type: 'home', phone: '0112345678' },
     // Add more locations as needed
-  ];
+  ]
 
   const icons = {
     home: {
@@ -22,7 +22,7 @@ const Map = () => {
       url: "../../assets/location-pin-station.png",
       scaledSize: { width: 32, height: 32 }
     }
-  };
+  }
 
   useEffect(() => {
     if (navigator.geolocation) {
@@ -39,13 +39,13 @@ const Map = () => {
     } else {
       console.error('Geolocation is not supported by this browser.');
     }
-  }, []);
+  }, [])
 
   return (
     <LoadScript googleMapsApiKey="AIzaSyDTYD4DNXMdQCRcjy0-ePWn5OpM0Ggki54">
       <GoogleMap
         mapContainerClassName="map-container"
-        center={currentPosition || { lat: 6.9271, lng: 79.8612 }} // Default to a location if geolocation fails
+        center={currentPosition || { lat: 6.9271, lng: 79.8612 }}
         zoom={12}
       >
         {currentPosition && (
@@ -76,7 +76,7 @@ const Map = () => {
         ))}
       </GoogleMap>
     </LoadScript>
-  );
-};
+  )
+}
 
 export default Map;
